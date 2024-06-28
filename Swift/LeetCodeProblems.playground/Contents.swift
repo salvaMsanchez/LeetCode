@@ -71,3 +71,38 @@ let solutionTwoSum: SolutionTwoSum = SolutionTwoSum()
 solutionTwoSum.twoSum([3, 2, 4], 6)
 solutionTwoSum.twoSum2([3, 2, 4], 6)
 solutionTwoSum.twoSum3([3, 2, 4], 6)
+
+print("==========================")
+
+// -- 2. Palindrome Number --
+// * Difficulty: Easy
+// Given an integer x, return true if x is a palindrome, and false otherwise.
+
+class SolutionPalindrome {
+    func isPalindrome(_ x: Int) -> Bool {
+        var container: [Character] = []
+        
+        if x < 0 {
+            return false
+        } else {
+            for num in String(x) {
+                container.append(num)
+            }
+            
+            var secondContainer: [Character] = []
+            for character in container.reversed() {
+                secondContainer.append(character)
+            }
+            
+            if container.elementsEqual(secondContainer) {
+                return true
+            }
+        }
+        return false
+    }
+}
+
+let solutionPalindrome: SolutionPalindrome = SolutionPalindrome()
+solutionPalindrome.isPalindrome(121)
+solutionPalindrome.isPalindrome(-121)
+solutionPalindrome.isPalindrome(10)
