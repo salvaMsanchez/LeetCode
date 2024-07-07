@@ -199,3 +199,33 @@ let solutionRomanInteger: SolutionRomanInteger = SolutionRomanInteger()
 solutionRomanInteger.romanToInt("III")
 solutionRomanInteger.romanToInt("LVIII")
 solutionRomanInteger.romanToInt("MCMXCIV")
+
+// -- 4. Longest Common Prefix --
+// * Difficulty: Easy
+// Write a function to find the longest common prefix string amongst an array of strings.
+// If there is no common prefix, return an empty string "".
+
+class SolutionLongestCommonPrefix {
+    func longestCommonPrefix(_ strs: [String]) -> String {
+        var prefixes: [String] = []
+        var firstPrefix: String = strs[0]
+        var firstPrefixSize: Int = firstPrefix.count
+        
+        for x in 1...firstPrefixSize {
+            prefixes.append(String(firstPrefix.prefix(x)))
+        }
+        
+        for prefix in prefixes {
+            print(strs[1].hasPrefix(prefix))
+            print(prefix)
+        }
+        
+        
+//        print(prefixes)
+        return ""
+    }
+}
+
+let solutionLongestCommonPrefix: SolutionLongestCommonPrefix = SolutionLongestCommonPrefix()
+solutionLongestCommonPrefix.longestCommonPrefix(["flower","flow","flight"])
+solutionLongestCommonPrefix.longestCommonPrefix(["dog","racecar","car"])
