@@ -207,25 +207,46 @@ solutionRomanInteger.romanToInt("MCMXCIV")
 
 class SolutionLongestCommonPrefix {
     func longestCommonPrefix(_ strs: [String]) -> String {
+        var commonPrefix: String = ""
         var prefixes: [String] = []
-        var firstPrefix: String = strs[0]
-        var firstPrefixSize: Int = firstPrefix.count
+        let firstPrefix: String = strs[0]
+        let firstPrefixSize: Int = firstPrefix.count
         
-        for x in 1...firstPrefixSize {
-            prefixes.append(String(firstPrefix.prefix(x)))
+        if firstPrefixSize != 0 {
+            for x in 1...firstPrefixSize {
+                prefixes.append(String(firstPrefix.prefix(x)))
+            }
+        } else {
+            prefixes = [""]
+            return commonPrefix
         }
         
-        for prefix in prefixes {
-            print(strs[1].hasPrefix(prefix))
-            print(prefix)
+        if prefixes.count == 1,
+           strs.count == 1 {
+            return prefixes[0]
         }
         
+        for (index, prefix) in prefixes.enumerated() {
+            for indexStrs in 1...strs.count - 1 {
+                if !strs[indexStrs].hasPrefix(prefix),
+                    index != 0 {
+                    commonPrefix = prefixes[index - 1]
+                    return commonPrefix
+                } else if !strs[indexStrs].hasPrefix(prefix),
+                          index == 0 {
+                    return ""
+                }
+            }
+        }
         
-//        print(prefixes)
-        return ""
+        return strs[0]
     }
 }
 
 let solutionLongestCommonPrefix: SolutionLongestCommonPrefix = SolutionLongestCommonPrefix()
 solutionLongestCommonPrefix.longestCommonPrefix(["flower","flow","flight"])
 solutionLongestCommonPrefix.longestCommonPrefix(["dog","racecar","car"])
+solutionLongestCommonPrefix.longestCommonPrefix([""])
+solutionLongestCommonPrefix.longestCommonPrefix(["a"])
+solutionLongestCommonPrefix.longestCommonPrefix(["flower","flower","flower","flower"])
+solutionLongestCommonPrefix.longestCommonPrefix(["a","b"])
