@@ -250,3 +250,77 @@ solutionLongestCommonPrefix.longestCommonPrefix([""])
 solutionLongestCommonPrefix.longestCommonPrefix(["a"])
 solutionLongestCommonPrefix.longestCommonPrefix(["flower","flower","flower","flower"])
 solutionLongestCommonPrefix.longestCommonPrefix(["a","b"])
+
+// -- 5. Valid Parentheses --
+// * Difficulty: Easy
+// Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+// An input string is valid if:
+//     1. Open brackets must be closed by the same type of brackets.
+//     2. Open brackets must be closed in the correct order.
+//     3. Every close bracket has a corresponding open bracket of the same type.
+
+class SolutionValidParentheses {
+    func isValid(_ s: String) -> Bool {
+        var parentheses: [Character] = []
+
+        for character in s {
+            switch character {
+                case "(", "[", "{":
+                    parentheses.append(character)
+                case ")":
+                    if !parentheses.isEmpty {
+                        if parentheses[parentheses.count - 1] == "(" {
+                            parentheses.removeLast()
+                        } else {
+                            return false
+                        }
+                    } else {
+                        return false
+                    }
+                case "]":
+                    if !parentheses.isEmpty {
+                        if parentheses[parentheses.count - 1] == "[" {
+                            parentheses.removeLast()
+                        } else {
+                            return false
+                        }
+                    } else {
+                        return false
+                    }
+                case "}":
+                    if !parentheses.isEmpty {
+                       if parentheses[parentheses.count - 1] == "{" {
+                            parentheses.removeLast()
+                        } else {
+                            return false
+                        }
+                    } else {
+                        return false
+                    }
+                default:
+                    return false
+                }
+        }
+
+        if parentheses.count == 0 {
+            return true
+        }
+
+        return false
+    }
+}
+
+let solutionValidParentheses: SolutionValidParentheses = SolutionValidParentheses()
+solutionValidParentheses.isValid("()") // true
+solutionValidParentheses.isValid("()[]{}") // true
+solutionValidParentheses.isValid("(]") // false
+solutionValidParentheses.isValid("([)]") // false
+solutionValidParentheses.isValid("{[]}") // true
+solutionValidParentheses.isValid("{[()]}") // true
+solutionValidParentheses.isValid("[") // false
+solutionValidParentheses.isValid("){") // false
+solutionValidParentheses.isValid("(){}}{") // false
+solutionValidParentheses.isValid("(}{)") // false
+solutionValidParentheses.isValid("[])") // false
+solutionValidParentheses.isValid("(([]){})") // true
+solutionValidParentheses.isValid("(])") // false
