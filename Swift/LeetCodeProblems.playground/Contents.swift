@@ -373,10 +373,40 @@ class SolutionFirstOccurrence{
 }
 
 let solutionFirstOccurrence: SolutionFirstOccurrence = SolutionFirstOccurrence()
-print(solutionFirstOccurrence.strStr("sadbutsad", "sad")) // 0
-print(solutionFirstOccurrence.strStr("leetcode", "leeto")) // -1
-print(solutionFirstOccurrence.strStr("butsad", "sad")) // 3
-print(solutionFirstOccurrence.strStr("hello", "ll")) // 2
-print(solutionFirstOccurrence.strStr("mississippi", "issi")) // 1
-print(solutionFirstOccurrence.strStr("a", "a")) // 1
-print(solutionFirstOccurrence.strStr("abc", "c")) // 2
+solutionFirstOccurrence.strStr("sadbutsad", "sad") // 0
+solutionFirstOccurrence.strStr("leetcode", "leeto") // -1
+solutionFirstOccurrence.strStr("butsad", "sad") // 3
+solutionFirstOccurrence.strStr("hello", "ll") // 2
+solutionFirstOccurrence.strStr("mississippi", "issi") // 1
+solutionFirstOccurrence.strStr("a", "a") // 1
+solutionFirstOccurrence.strStr("abc", "c") // 2
+
+// -- 7. Search Insert Position --
+// * Difficulty: Easy
+// Given a sorted array of distinct integers and a target value, return the index if the target is found.
+// If not, return the index where it would be if it were inserted in order.
+// You must write an algorithm with O(log n) runtime complexity.
+
+class SolutionSearchInsertPosition{
+    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+        if let index = nums.firstIndex(of: target) {
+            return index
+        } else {
+            var numsModified: [Int] = nums
+            numsModified.append(target)
+            numsModified.sort()
+
+            if let index = numsModified.firstIndex(of: target) {
+                return index
+            }
+        }
+
+        return -1
+    }
+}
+
+let solutionSearchInsertPosition: SolutionSearchInsertPosition = SolutionSearchInsertPosition()
+solutionSearchInsertPosition.searchInsert([1,3,5,6], 5) // 2
+solutionSearchInsertPosition.searchInsert([1,3,5,6], 2) // 1
+solutionSearchInsertPosition.searchInsert([1,3,5,6], 7) // 4
+
