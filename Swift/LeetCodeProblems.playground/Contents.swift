@@ -324,3 +324,59 @@ solutionValidParentheses.isValid("(}{)") // false
 solutionValidParentheses.isValid("[])") // false
 solutionValidParentheses.isValid("(([]){})") // true
 solutionValidParentheses.isValid("(])") // false
+
+// -- 6. Find the Index of the First Occurrence in a String --
+// * Difficulty: Easy
+// Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+class SolutionFirstOccurrence{
+    func strStr(_ haystack: String, _ needle: String) -> Int {
+        if haystack.contains(needle) {
+            var needleSplitted: [Character] = []
+            for letter in needle {
+                needleSplitted.append(letter)
+            }
+
+            var haystackSplitted: [Character] = []
+            for letter in haystack {
+                haystackSplitted.append(letter)
+            }
+
+            if needleSplitted == haystackSplitted {
+                return 0
+            } else {
+                var stack: [Character] = []
+                for (index, value) in haystackSplitted.enumerated() {
+                    if value == needleSplitted[0] {
+                        stack.append(value)
+                        if stack == needleSplitted {
+                            return index
+                        } else {
+                           for i in index + 1...index + (needleSplitted.count - 1) {
+                                stack.append(haystackSplitted[i])
+                            }
+                            if stack == needleSplitted {
+                                return index
+                            } else {
+                                stack = []
+                            }
+                        }
+                    }
+                }
+            }
+
+            return 0
+        } else {
+            return -1
+        }
+    }
+}
+
+let solutionFirstOccurrence: SolutionFirstOccurrence = SolutionFirstOccurrence()
+print(solutionFirstOccurrence.strStr("sadbutsad", "sad")) // 0
+print(solutionFirstOccurrence.strStr("leetcode", "leeto")) // -1
+print(solutionFirstOccurrence.strStr("butsad", "sad")) // 3
+print(solutionFirstOccurrence.strStr("hello", "ll")) // 2
+print(solutionFirstOccurrence.strStr("mississippi", "issi")) // 1
+print(solutionFirstOccurrence.strStr("a", "a")) // 1
+print(solutionFirstOccurrence.strStr("abc", "c")) // 2
